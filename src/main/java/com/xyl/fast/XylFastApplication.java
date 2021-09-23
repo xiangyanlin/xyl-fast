@@ -1,4 +1,4 @@
-package com.example.xylfast;
+package com.xyl.fast;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

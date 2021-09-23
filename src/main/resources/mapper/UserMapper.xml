@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyl.fast.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.xyl.fast.entity.User">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="role_id" jdbcType="INTEGER" property="role_id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="user_name"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="real_name" jdbcType="VARCHAR" property="real_name"/>
+        <result column="id_card" jdbcType="VARCHAR" property="id_card"/>
+        <result column="profession" jdbcType="VARCHAR" property="profession"/>
+        <result column="education" jdbcType="VARCHAR" property="education"/>
+        <result column="house_num" jdbcType="INTEGER" property="house_num"/>
+        <result column="identify" jdbcType="VARCHAR" property="identify"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="create_time"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , role_id, user_name, `password`, avatar, email, mobile, sex, real_name, id_card,
+    profession, education, house_num, identify, create_time, remark
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from user
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xyl.fast.entity.User"
+            useGeneratedKeys="true">
+        insert into user (role_id, user_name, `password`,
+                          avatar, email, mobile,
+                          sex, real_name, id_card,
+                          profession, education, house_num,
+                          identify, create_time, remark)
+        values (#{role_id,jdbcType=INTEGER}, #{user_name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+                #{avatar,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+                #{sex,jdbcType=VARCHAR}, #{real_name,jdbcType=VARCHAR}, #{id_card,jdbcType=VARCHAR},
+                #{profession,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{house_num,jdbcType=INTEGER},
+                #{identify,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xyl.fast.entity.User"
+            useGeneratedKeys="true">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="role_id != null">
+                role_id,
+            </if>
+            <if test="user_name != null">
+                user_name,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="real_name != null">
+                real_name,
+            </if>
+            <if test="id_card != null">
+                id_card,
+            </if>
+            <if test="profession != null">
+                profession,
+            </if>
+            <if test="education != null">
+                education,
+            </if>
+            <if test="house_num != null">
+                house_num,
+            </if>
+            <if test="identify != null">
+                identify,
+            </if>
+            <if test="create_time != null">
+                create_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="role_id != null">
+                #{role_id,jdbcType=INTEGER},
+            </if>
+            <if test="user_name != null">
+                #{user_name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="real_name != null">
+                #{real_name,jdbcType=VARCHAR},
+            </if>
+            <if test="id_card != null">
+                #{id_card,jdbcType=VARCHAR},
+            </if>
+            <if test="profession != null">
+                #{profession,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="house_num != null">
+                #{house_num,jdbcType=INTEGER},
+            </if>
+            <if test="identify != null">
+                #{identify,jdbcType=VARCHAR},
+            </if>
+            <if test="create_time != null">
+                #{create_time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xyl.fast.entity.User">
+        update user
+        <set>
+            <if test="role_id != null">
+                role_id = #{role_id,jdbcType=INTEGER},
+            </if>
+            <if test="user_name != null">
+                user_name = #{user_name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                `password` = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="real_name != null">
+                real_name = #{real_name,jdbcType=VARCHAR},
+            </if>
+            <if test="id_card != null">
+                id_card = #{id_card,jdbcType=VARCHAR},
+            </if>
+            <if test="profession != null">
+                profession = #{profession,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                education = #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="house_num != null">
+                house_num = #{house_num,jdbcType=INTEGER},
+            </if>
+            <if test="identify != null">
+                identify = #{identify,jdbcType=VARCHAR},
+            </if>
+            <if test="create_time != null">
+                create_time = #{create_time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xyl.fast.entity.User">
+        update user
+        set role_id     = #{role_id,jdbcType=INTEGER},
+            user_name   = #{user_name,jdbcType=VARCHAR},
+            `password`  = #{password,jdbcType=VARCHAR},
+            avatar      = #{avatar,jdbcType=VARCHAR},
+            email       = #{email,jdbcType=VARCHAR},
+            mobile      = #{mobile,jdbcType=VARCHAR},
+            sex         = #{sex,jdbcType=VARCHAR},
+            real_name   = #{real_name,jdbcType=VARCHAR},
+            id_card     = #{id_card,jdbcType=VARCHAR},
+            profession  = #{profession,jdbcType=VARCHAR},
+            education   = #{education,jdbcType=VARCHAR},
+            house_num   = #{house_num,jdbcType=INTEGER},
+            identify    = #{identify,jdbcType=VARCHAR},
+            create_time = #{create_time,jdbcType=TIMESTAMP},
+            remark      = #{remark,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

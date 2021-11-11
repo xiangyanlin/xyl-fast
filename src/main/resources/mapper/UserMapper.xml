@@ -3,20 +3,20 @@
 <mapper namespace="com.xyl.fast.mapper.UserMapper">
     <resultMap id="BaseResultMap" type="com.xyl.fast.entity.User">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="role_id" jdbcType="INTEGER" property="role_id"/>
-        <result column="user_name" jdbcType="VARCHAR" property="user_name"/>
+        <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
         <result column="sex" jdbcType="VARCHAR" property="sex"/>
-        <result column="real_name" jdbcType="VARCHAR" property="real_name"/>
-        <result column="id_card" jdbcType="VARCHAR" property="id_card"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="id_card" jdbcType="VARCHAR" property="idCard"/>
         <result column="profession" jdbcType="VARCHAR" property="profession"/>
         <result column="education" jdbcType="VARCHAR" property="education"/>
-        <result column="house_num" jdbcType="INTEGER" property="house_num"/>
+        <result column="house_num" jdbcType="INTEGER" property="houseNum"/>
         <result column="identify" jdbcType="VARCHAR" property="identify"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="create_time"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -197,7 +197,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.xyl.fast.entity.User">
+    <update id="updateByPrimaryKey" parameterType="com.xyl.fast.entity.EsUser">
         update user
         set role_id     = #{role_id,jdbcType=INTEGER},
             user_name   = #{user_name,jdbcType=VARCHAR},

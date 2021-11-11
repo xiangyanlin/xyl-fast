@@ -1,6 +1,7 @@
 package com.xyl.fast.controller;
 
 import com.xyl.fast.dao.UserDao;
+import com.xyl.fast.entity.EsUser;
 import com.xyl.fast.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

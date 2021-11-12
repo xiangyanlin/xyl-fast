@@ -9,7 +9,10 @@ import com.alibaba.fastjson.serializer.ValueFilter;
 import com.xyl.fast.dao.EsUserDao;
 import com.xyl.fast.dao.UserDao;
 import com.xyl.fast.entity.EsUser;
+import com.xyl.fast.entity.Product;
 import com.xyl.fast.entity.User;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeanUtils;
@@ -17,7 +20,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -33,6 +42,9 @@ public class SpringDataESProductDaoTest {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private ElasticsearchOperations operations;
 
     @Test
     public void test() {
@@ -101,4 +113,36 @@ public class SpringDataESProductDaoTest {
             System.out.println(user);
         }
     }
+
+
+    /**
+     * term 查询
+     * search(termQueryBuilder) 调用搜索方法，参数查询构建器对象
+     */
+    @Test
+    public void termQuery() {
+        TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("userName", "test");
+        Query query = new NativeSearchQueryBuilder()
+                .withQuery(termQueryBuilder)
+                .build();
+
+        SearchHits<EsUser> search = operations.search(query, EsUser.class, IndexCoordinates.of("user_index"));
+        System.out.println(JSON.toJSONString(search.getSearchHits()));
+    }
+
+    /**
+     * term 查询加分页
+     */
+    @Test
+    public void termQueryByPage(){
+      //设置查询分页
+        Query query = new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.termQuery("profession", "工"))
+                .withPageable(PageRequest.of(0, 3))
+                .build();
+
+        SearchHits<EsUser> search = operations.search(query, EsUser.class, IndexCoordinates.of("user_index"));
+        System.out.println(JSON.toJSONString(search.getSearchHits()));
+
+      }
 }
